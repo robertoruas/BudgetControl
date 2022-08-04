@@ -1,0 +1,19 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="11.0.0" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Core\BudgetControl.Core.Application\BudgetControl.Core.Application.csproj" />
+    <ProjectReference Include="..\..\Infrastructure\BudgetControl.Infrastructure.Identity\BudgetControl.Infrastructure.Identity.csproj" />
+    <ProjectReference Include="..\..\Infrastructure\BudgetControl.Infrastructure.Shared\BudgetControl.Infrastructure.Shared.csproj" />
+  </ItemGroup>
+
+</Project>
