@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BudgetControl.Infrastructure.Persistence.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    [Migration("20220804033234_Add-Tables_User_Income_Outgoing")]
-    partial class AddTables_User_Income_Outgoing
+    [Migration("20220805030639_Add-Table_Users_Incomes_Outgoings")]
+    partial class AddTable_Users_Incomes_Outgoings
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -82,6 +82,14 @@ namespace BudgetControl.Infrastructure.Persistence.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
+                    b.Property<DateTime?>("BlockDate")
+                        .HasColumnType("smalldatetime");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(200)
@@ -91,6 +99,14 @@ namespace BudgetControl.Infrastructure.Persistence.Migrations
                         .IsRequired()
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
+
+                    b.Property<byte?>("Reason")
+                        .HasColumnType("tinyint");
+
+                    b.Property<byte>("Status")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("tinyint")
+                        .HasDefaultValue((byte)1);
 
                     b.Property<string>("Username")
                         .IsRequired()
@@ -105,8 +121,10 @@ namespace BudgetControl.Infrastructure.Persistence.Migrations
                         new
                         {
                             Id = 1,
+                            Email = "roberto.ruasm@gmail.com",
                             Name = "System Administrator",
-                            Password = "PassCrypto",
+                            Password = "6FB3E8200EB5EFE167679EF9326F7CD5A814ABE24CC6EFA777DD168FE8379B50CCDA08627091D676C0AC0F22954812EF93F9C2454CCDB6A5001052A071FE5569",
+                            Status = (byte)1,
                             Username = "administrator"
                         });
                 });

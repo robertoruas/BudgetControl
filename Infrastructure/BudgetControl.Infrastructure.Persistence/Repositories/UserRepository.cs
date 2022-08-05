@@ -8,6 +8,7 @@ namespace BudgetControl.Infrastructure.Persistence.Repositories
     public class UserRepository : Repository<User>, IUserRepository
     {
         public UserRepository(ApplicationContext context) : base(context) { }
+
         public async Task<User> GetByName(string username)
         {
             return await Context.Users.FirstOrDefaultAsync(u => u.Username == username);

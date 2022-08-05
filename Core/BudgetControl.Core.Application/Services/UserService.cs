@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using BudgetControl.Core.Application.DTOs;
 using BudgetControl.Core.Application.Interfaces;
+using BudgetControl.Core.Application.Security;
 using BudgetControl.Core.Domain.Entities;
 using BudgetControl.Core.Domain.Interfaces;
 
@@ -20,6 +21,7 @@ namespace BudgetControl.Core.Application.Services
         public async Task Add(UserDTO userDTO)
         {
             var mapUser = _mapper.Map<User>(userDTO);
+            mapUser.SetPassword(Sha512Crypto.Encrypt(userDTO.Password));
             await _userRepository.Create(mapUser);
         }
 
@@ -53,7 +55,15 @@ namespace BudgetControl.Core.Application.Services
         public async Task Update(UserDTO userDTO)
         {
             var mapUser = _mapper.Map<User>(userDTO);
+            mapUser.SetPassword(Sha512Crypto.Encrypt(userDTO.Password));
             await _userRepository.Update(mapUser);
+        }
+
+        public async Task<UserDTO> GetUserByUsernameAndPassword(string username, string password)
+        {
+            var result = await _userRepository.GetByUsernameAndPassword(username, Sha512Crypto.Encrypt(password));
+
+            return _mapper.Map<UserDTO>(result);
         }
     }
 }

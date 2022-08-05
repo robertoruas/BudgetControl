@@ -26,7 +26,7 @@ namespace BudgetControl.Infrastructure.Persistence.Repositories
         public async Task<T> Create(T entity)
         {
             Context.Add(entity);
-            var result = await Context.SaveChangesAsync();
+            await Context.SaveChangesAsync();
 
             return entity;
         }
@@ -46,7 +46,7 @@ namespace BudgetControl.Infrastructure.Persistence.Repositories
         public async Task<IEnumerable<T>> Get(Expression<Func<T, bool>> predicate = null)
         {
             if (predicate == null)
-                return await this.Get();
+                return await Get();
 
             return await Entity.Where(predicate).ToListAsync();
         }

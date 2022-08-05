@@ -23,18 +23,22 @@ namespace BudgetControl.Api.Controllers
         {
             try
             {
-                var mapUser = await _userService.GetById(userDTO.Id);
+                var mapUser = await _userService.GetUserByUsernameAndPassword(userDTO.UserName, userDTO.Password);
+
+                if (mapUser == null) return NotFound(new { message = "username or password wrong." });
 
                 string token = _service.GenerateToken(mapUser);
 
                 return Ok(new
                 {
-                    token = token,
+                    token,
                     user = new UserDTO
                     {
                         Id = mapUser.Id,
+                        Name = mapUser.Name,
                         Email = mapUser.Email,
-                        UserName = mapUser.UserName
+                        UserName = mapUser.UserName,
+                        Status = mapUser.Status
                     }
                 });
             }
