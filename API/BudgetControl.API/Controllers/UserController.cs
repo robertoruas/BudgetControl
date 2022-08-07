@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace BudgetControl.Api.Controllers
 {
-    [ApiController, Route("api/[controller]")]
+    [ApiController, Route("api/v1/[controller]")]
     public class UserController : ControllerBase
     {
         private readonly IUserService _userService;
@@ -32,7 +32,7 @@ namespace BudgetControl.Api.Controllers
             }
         }
 
-        [HttpGet, Authorize]
+        [HttpGet, Authorize, Route("{id}")]
         public async Task<IActionResult> Get(int id)
         {
             try
@@ -48,31 +48,14 @@ namespace BudgetControl.Api.Controllers
                 return BadRequest(ex);
             }
         }
-
-        [HttpGet, Authorize]
-        public async Task<IActionResult> Get(string username)
-        {
-            try
-            {
-                var user = await _userService.GetUserByUsername(username);
-
-                if (user == null) return NotFound();
-
-                return Ok(user);
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex);
-            }
-        }
-
-        [HttpPost, Authorize]
+        
+        [HttpPost, Authorize, Route("{id}")]
         public async Task<IActionResult> Post([FromBody] UserDTO userDTO)
         {
             try
             {
                 await _userService.Add(userDTO);
-                return new CreatedAtRouteResult("Get", new UserDTO { Id = userDTO.Id }, userDTO);
+                return Ok(userDTO);
             }
             catch (Exception ex)
             {

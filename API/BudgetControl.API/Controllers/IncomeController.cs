@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace BudgetControl.API.Controllers
 {
-    [ApiController, Route("api/[controller]")]
+    [ApiController, Route("api/v1/[controller]")]
     public class IncomeController : ControllerBase
     {
         private readonly IIncomeService _service;
@@ -33,7 +33,7 @@ namespace BudgetControl.API.Controllers
             }
         }
 
-        [HttpGet, Authorize]
+        [HttpGet, Authorize, Route("{id}")]
         public async Task<IActionResult> Get(int id)
         {
             try
@@ -50,7 +50,7 @@ namespace BudgetControl.API.Controllers
             }
         }
 
-        [HttpGet, Authorize]
+        [HttpGet, Authorize, Route("{month}/{year}")]
         public async Task<IActionResult> Get(int month, int year)
         {
             try
@@ -74,7 +74,7 @@ namespace BudgetControl.API.Controllers
             try
             {
                 await _service.Add(incomeDTO);
-                return new CreatedAtRouteResult("Get", new IncomeDTO { Id = incomeDTO.Id }, incomeDTO);
+                return Ok(incomeDTO);
             }
             catch (Exception ex)
             {
@@ -82,7 +82,7 @@ namespace BudgetControl.API.Controllers
             }
         }
 
-        [HttpPut, Authorize]
+        [HttpPut, Authorize,Route("{id}")]
         public async Task<IActionResult> Put(int id, [FromBody] IncomeDTO incomeDTO)
         {
             try

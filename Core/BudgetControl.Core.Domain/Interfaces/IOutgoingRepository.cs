@@ -9,6 +9,6 @@ namespace BudgetControl.Core.Domain.Interfaces
 {
     public interface IOutgoingRepository : IRepository<Outgoing>
     {
-        Task<IEnumerable<Outgoing>> GetByMonthAndYear(Months month, int year);
+        Task<IEnumerable<Outgoing>> GetByMonthAndYear(int month, int year);
     }
 }

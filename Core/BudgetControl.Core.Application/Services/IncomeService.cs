@@ -51,7 +51,7 @@ namespace BudgetControl.Core.Application.Services
 
         public async Task<IEnumerable<IncomeDTO>> GetByMonthAndYear(int month, int year)
         {
-            var result = await _incomeRepository.GetByMonthAndYear((Months)month, year);
+            var result = await _incomeRepository.GetByMonthAndYear(month, year);
 
             return _mapper.Map<IEnumerable<IncomeDTO>>(result);
         }

@@ -16,7 +16,7 @@ namespace BudgetControl.Core.Application.DTOs
         [MaxLength(200), Required(ErrorMessage = $"{nameof(Email)} is Required.")]
         public string Email { get; set; }
 
-        [RegularExpression(@"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}")]
+        //[RegularExpression(@"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}")]
         [Required(ErrorMessage = $"{nameof(Password)} is Required.")]
         public string Password { get; set; }
 

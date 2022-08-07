@@ -9,6 +9,6 @@ namespace BudgetControl.Core.Domain.Interfaces
 {
     public interface IIncomeRepository : IRepository<Income>
     {
-        Task<IEnumerable<Income>> GetByMonthAndYear(Months month, int year);
+        Task<IEnumerable<Income>> GetByMonthAndYear(int month, int year);
     }
 }
