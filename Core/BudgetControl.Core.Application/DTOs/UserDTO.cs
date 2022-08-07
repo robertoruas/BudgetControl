@@ -1,5 +1,6 @@
 ﻿using BudgetControl.Core.Domain.Entities;
 using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace BudgetControl.Core.Application.DTOs
 {
@@ -16,8 +17,8 @@ namespace BudgetControl.Core.Application.DTOs
         [MaxLength(200), Required(ErrorMessage = $"{nameof(Email)} is Required.")]
         public string Email { get; set; }
 
-        //[RegularExpression(@"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}")]
         [Required(ErrorMessage = $"{nameof(Password)} is Required.")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string Password { get; set; }
 
         public UserStatus Status { get; set; }

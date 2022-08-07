@@ -41,6 +41,8 @@ namespace BudgetControl.Api.Controllers
 
                 if (user == null) return NotFound();
 
+                user.Password = null;
+
                 return Ok(user);
             }
             catch (Exception ex)
@@ -49,12 +51,15 @@ namespace BudgetControl.Api.Controllers
             }
         }
         
-        [HttpPost, Authorize, Route("{id}")]
+        [HttpPost, Authorize]
         public async Task<IActionResult> Post([FromBody] UserDTO userDTO)
         {
             try
             {
                 await _userService.Add(userDTO);
+
+                userDTO.Password = null;
+
                 return Ok(userDTO);
             }
             catch (Exception ex)
@@ -63,7 +68,7 @@ namespace BudgetControl.Api.Controllers
             }
         }
 
-        [HttpPut, Authorize]
+        [HttpPut, Authorize, Route("{id}")]
         public async Task<IActionResult> Put(int id, [FromBody] UserDTO userDTO)
         {
             try
@@ -74,6 +79,9 @@ namespace BudgetControl.Api.Controllers
                 }
 
                 await _userService.Update(userDTO);
+
+                userDTO.Password = null;
+
                 return Ok(userDTO);
             }
             catch (Exception ex)
@@ -82,7 +90,7 @@ namespace BudgetControl.Api.Controllers
             }
         }
 
-        [HttpDelete, Authorize]
+        [HttpDelete, Authorize, Route("{id}")]
         public async Task<IActionResult> Delete(int id)
         {
             try
