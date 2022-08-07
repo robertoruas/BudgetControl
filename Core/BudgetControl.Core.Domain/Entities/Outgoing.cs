@@ -28,5 +28,21 @@
         public decimal Value { get; private set; }
 
         public DateTime Date { get; private set; }
+
+        public Months Month
+        {
+            get
+            {
+                return (Months)Date.Month;
+            }
+        }
+
+        public int Year
+        {
+            get
+            {
+                return Date.Year;
+            }
+        }
     }
 }

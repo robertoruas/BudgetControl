@@ -13,7 +13,7 @@ namespace BudgetControl.Infrastructure.Persistence.Context
         public ApplicationContext CreateDbContext(string[] args)
         {
             var optionsBuilder = new DbContextOptionsBuilder<ApplicationContext>();
-            optionsBuilder.UseSqlServer("Server=localhost,1433;Database=budgetcontrol;User Id=sa;Password=Saur!0253;");
+            optionsBuilder.UseSqlServer("Server=localhost,1433;Database=budgetcontrol;User Id=bcuser;Password=budget123;");
 
             return new ApplicationContext(optionsBuilder.Options);
         }

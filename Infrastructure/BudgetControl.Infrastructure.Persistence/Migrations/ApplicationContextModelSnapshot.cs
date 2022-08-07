@@ -44,7 +44,7 @@ namespace BudgetControl.Infrastructure.Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Incomes");
+                    b.ToTable("Incomes", (string)null);
                 });
 
             modelBuilder.Entity("BudgetControl.Core.Domain.Entities.Outgoing", b =>
@@ -69,7 +69,7 @@ namespace BudgetControl.Infrastructure.Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Outgoings");
+                    b.ToTable("Outgoings", (string)null);
                 });
 
             modelBuilder.Entity("BudgetControl.Core.Domain.Entities.User", b =>
@@ -113,7 +113,7 @@ namespace BudgetControl.Infrastructure.Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Users");
+                    b.ToTable("Users", (string)null);
 
                     b.HasData(
                         new

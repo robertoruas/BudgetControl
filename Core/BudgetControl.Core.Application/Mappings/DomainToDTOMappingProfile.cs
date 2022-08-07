@@ -10,6 +10,7 @@ namespace BudgetControl.Core.Application.Mappings
         {
             CreateMap<User, UserDTO>().ReverseMap();
             CreateMap<Income, IncomeDTO>().ReverseMap();
+            CreateMap<Outgoing, OutgoingDTO>().ReverseMap();
         }
     }
 }
