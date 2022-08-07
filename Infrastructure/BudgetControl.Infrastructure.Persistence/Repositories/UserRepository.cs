@@ -11,12 +11,12 @@ namespace BudgetControl.Infrastructure.Persistence.Repositories
 
         public async Task<User> GetByName(string username)
         {
-            return await Context.Users.FirstOrDefaultAsync(u => u.Username == username);
+            return await Entity.FirstOrDefaultAsync(u => u.Username == username);
         }
 
         public async Task<User> GetByUsernameAndPassword(string username, string password)
         {
-            return await Context.Users.FirstOrDefaultAsync(u => u.Username == username && u.Password == password);
+            return await Entity.FirstOrDefaultAsync(u => u.Username == username && u.Password == password);
         }
     }
 }

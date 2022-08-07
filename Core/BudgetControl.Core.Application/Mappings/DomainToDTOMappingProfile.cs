@@ -9,6 +9,7 @@ namespace BudgetControl.Core.Application.Mappings
         public DomainToDTOMappingProfile()
         {
             CreateMap<User, UserDTO>().ReverseMap();
+            CreateMap<Income, IncomeDTO>().ReverseMap();
         }
     }
 }

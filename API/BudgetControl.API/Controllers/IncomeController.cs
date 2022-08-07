@@ -3,16 +3,16 @@ using BudgetControl.Core.Application.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-namespace BudgetControl.Api.Controllers
+namespace BudgetControl.API.Controllers
 {
     [ApiController, Route("api/[controller]")]
-    public class UserController : ControllerBase
+    public class IncomeController : ControllerBase
     {
-        private readonly IUserService _userService;
+        private readonly IIncomeService _service;
 
-        public UserController(IUserService userService)
+        public IncomeController(IIncomeService service)
         {
-            _userService = userService ?? throw new ArgumentNullException(nameof(userService));
+            _service = service ?? throw new ArgumentNullException(nameof(service));
         }
 
         [HttpGet, Authorize]
@@ -20,11 +20,12 @@ namespace BudgetControl.Api.Controllers
         {
             try
             {
-                var users = await _userService.GetAll();
+                var incomes = await _service.GetAll();
 
-                if (users == null) return NotFound();
+                if (incomes == null) return NotFound();
 
-                return Ok(users);
+                return Ok(incomes);
+
             }
             catch (Exception ex)
             {
@@ -37,11 +38,11 @@ namespace BudgetControl.Api.Controllers
         {
             try
             {
-                var user = await _userService.GetById(id);
+                var income = await _service.GetById(id);
 
-                if (user == null) return NotFound();
+                if(income == null) return NotFound(id);
 
-                return Ok(user);
+                return Ok(income);
             }
             catch (Exception ex)
             {
@@ -50,15 +51,16 @@ namespace BudgetControl.Api.Controllers
         }
 
         [HttpGet, Authorize]
-        public async Task<IActionResult> Get(string username)
+        public async Task<IActionResult> Get(int month, int year)
         {
             try
             {
-                var user = await _userService.GetUserByUsername(username);
 
-                if (user == null) return NotFound();
+                var incomes = await _service.GetByMonthAndYear(month, year);
+                if (incomes == null) return NotFound($"No incomes found in month {month} and year {year}.");
 
-                return Ok(user);
+                return Ok(incomes);
+
             }
             catch (Exception ex)
             {
@@ -67,12 +69,12 @@ namespace BudgetControl.Api.Controllers
         }
 
         [HttpPost, Authorize]
-        public async Task<IActionResult> Post([FromBody] UserDTO userDTO)
+        public async Task<IActionResult> Post([FromBody] IncomeDTO incomeDTO)
         {
             try
             {
-                await _userService.Add(userDTO);
-                return new CreatedAtRouteResult("Get", new UserDTO { Id = userDTO.Id }, userDTO);
+                await _service.Add(incomeDTO);
+                return new CreatedAtRouteResult("Get", new IncomeDTO { Id = incomeDTO.Id }, incomeDTO);
             }
             catch (Exception ex)
             {
@@ -81,17 +83,17 @@ namespace BudgetControl.Api.Controllers
         }
 
         [HttpPut, Authorize]
-        public async Task<IActionResult> Put(int id, [FromBody] UserDTO userDTO)
+        public async Task<IActionResult> Put(int id, [FromBody] IncomeDTO incomeDTO)
         {
             try
             {
-                if (id != userDTO.Id)
-                {
-                    throw new ArgumentException($"Param {nameof(id)} not equals in {nameof(userDTO)}.{nameof(userDTO.Id)}");
-                }
+                if (id != incomeDTO.Id)
+                    throw new ArgumentException($"Param {nameof(id)} not equals in {nameof(incomeDTO)}.{nameof(incomeDTO.Id)}");
 
-                await _userService.Update(userDTO);
-                return Ok(userDTO);
+                await _service.Update(incomeDTO);
+
+                return Ok(incomeDTO);
+
             }
             catch (Exception ex)
             {
@@ -104,11 +106,11 @@ namespace BudgetControl.Api.Controllers
         {
             try
             {
-                var userDTO = await _userService.GetById(id);
-                if (userDTO == null)
-                    return NotFound();
+                var income = await _service.GetById(id);
 
-                await _userService.Delete(userDTO);
+                if (income == null) return NotFound(id);
+
+                await _service.Delete(income);
 
                 return Ok();
             }
