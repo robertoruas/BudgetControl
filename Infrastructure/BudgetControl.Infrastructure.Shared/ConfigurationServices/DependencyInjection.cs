@@ -18,8 +18,12 @@ namespace BudgetControl.Infrastructure.Shared.ConfigurationServices
                 b => b.MigrationsAssembly(typeof(ApplicationContext).FullName)));
 
             services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IIncomeRepository, IncomeRepository>();
+            services.AddScoped<IOutgoingRepository, OutgoingRepository>();
 
             services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IIncomeService, IncomeService>();
+            services.AddScoped<IOutgoingService, OutgoingService>();
 
             return services;
         }

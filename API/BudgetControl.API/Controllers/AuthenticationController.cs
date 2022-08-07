@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace BudgetControl.Api.Controllers
 {
-    [ApiController, Route("api/[controller]")]
+    [ApiController, Route("api/auth")]
     public class AuthenticationController : ControllerBase
     {
         private readonly ITokenService _service;
@@ -19,11 +19,11 @@ namespace BudgetControl.Api.Controllers
         }
 
         [HttpPost, AllowAnonymous]
-        public async Task<IActionResult> Login(UserDTO userDTO)
+        public async Task<IActionResult> Login(LoginDTO loginDTO)
         {
             try
             {
-                var mapUser = await _userService.GetUserByUsernameAndPassword(userDTO.UserName, userDTO.Password);
+                var mapUser = await _userService.GetUserByUsernameAndPassword(loginDTO.UserName, loginDTO.Password);
 
                 if (mapUser == null) return NotFound(new { message = "username or password wrong." });
 

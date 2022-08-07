@@ -34,10 +34,10 @@ namespace BudgetControl.Api.Bootstrap
 
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             services.AddEndpointsApiExplorer();
-            services.AddSwaggerGen(s =>
-            {
-                s.SwaggerDoc("v1", new OpenApiInfo { Title = "SaurTech", Version = "v1" });
-            });
+            //services.AddSwaggerGen(s =>
+            //{
+            //    s.SwaggerDoc("v1", new OpenApiInfo { Title = "SaurTech", Version = "v1" });
+            //});
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -45,8 +45,8 @@ namespace BudgetControl.Api.Bootstrap
             // Configure the HTTP request pipeline.
             if (env.IsDevelopment())
             {
-                app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "SaurTech v1"));
+                //app.UseSwagger();
+                //app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "SaurTech v1"));
             }
 
             app.UseHttpsRedirection();
