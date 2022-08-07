@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace BudgetControl.Api.Controllers
 {
-    [ApiController, Route("api/auth")]
+    [ApiController, Route("api/v1/auth")]
     public class AuthenticationController : ControllerBase
     {
         private readonly ITokenService _service;

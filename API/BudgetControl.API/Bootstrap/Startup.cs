@@ -21,10 +21,6 @@ namespace BudgetControl.Api.Bootstrap
         public void ConfigureServices(IServiceCollection services)
         {
             // Add services to the container.
-            services.AddAuthenticationConfiguration();
-            services.AddInfrastructure(Configuration);
-            services.AddAutoMapperConfiguration();
-
             services.AddCors();
             services.AddControllers()
                 .AddJsonOptions(options =>
@@ -33,11 +29,14 @@ namespace BudgetControl.Api.Bootstrap
                 });
 
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-            services.AddEndpointsApiExplorer();
+            //services.AddEndpointsApiExplorer();
             //services.AddSwaggerGen(s =>
             //{
             //    s.SwaggerDoc("v1", new OpenApiInfo { Title = "SaurTech", Version = "v1" });
             //});
+            services.AddAuthenticationConfiguration();
+            services.AddAutoMapperConfiguration();
+            services.AddInfrastructure(Configuration);
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -49,7 +48,7 @@ namespace BudgetControl.Api.Bootstrap
                 //app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "SaurTech v1"));
             }
 
-            app.UseHttpsRedirection();
+            //app.UseHttpsRedirection();
 
             app.UseRouting();
 
