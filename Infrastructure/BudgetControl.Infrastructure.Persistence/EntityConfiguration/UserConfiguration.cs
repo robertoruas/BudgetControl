@@ -19,7 +19,7 @@ namespace BudgetControl.Infrastructure.Persistence.EntityConfiguration
             builder.Property(u => u.BlockDate).HasColumnType("smalldatetime").IsRequired(false);
             builder.Property(u => u.Reason).HasColumnType("tinyint").IsRequired(false);
 
-            builder.HasData(new User(1, "System Administrator", Sha512Crypto.Encrypt("R0t@No0253"), "administrator", "roberto.ruasm@gmail.com", UserStatus.Active));
+            builder.HasData(new User(1, "System Administrator", Sha512Crypto.Encrypt("bcontrol@123"), "administrator", "roberto.ruasm@gmail.com", UserStatus.Active));
         }
     }
 }
