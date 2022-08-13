@@ -20,11 +20,11 @@ namespace BudgetControl.API.Controllers
         {
             try
             {
-                var outgoings = await _service.GetAll();
+                var expenses = await _service.GetAll();
 
-                if (outgoings == null) return NotFound();
+                if (expenses == null) return NotFound();
 
-                return Ok(outgoings);
+                return Ok(expenses);
 
             }
             catch (Exception ex)
@@ -38,11 +38,11 @@ namespace BudgetControl.API.Controllers
         {
             try
             {
-                var outgoing = await _service.GetById(id);
+                var expense = await _service.GetById(id);
 
-                if (outgoing == null) return NotFound(id);
+                if (expense == null) return NotFound(id);
 
-                return Ok(outgoing);
+                return Ok(expense);
             }
             catch (Exception ex)
             {
@@ -56,10 +56,10 @@ namespace BudgetControl.API.Controllers
             try
             {
 
-                var outgoings = await _service.GetByMonthAndYear(month, year);
-                if (outgoings == null) return NotFound($"No outgoings found in month {month} and year {year}.");
+                var expenses = await _service.GetByMonthAndYear(month, year);
+                if (expenses == null) return NotFound($"No expenses found in month {month} and year {year}.");
 
-                return Ok(outgoings);
+                return Ok(expenses);
 
             }
             catch (Exception ex)
@@ -69,12 +69,12 @@ namespace BudgetControl.API.Controllers
         }
 
         [HttpPost, Authorize]
-        public async Task<IActionResult> Post([FromBody] ExpenseDTO outgoingDTO)
+        public async Task<IActionResult> Post([FromBody] ExpenseDTO expenseDTO)
         {
             try
             {
-                await _service.Add(outgoingDTO);
-                return Ok(outgoingDTO);
+                await _service.Add(expenseDTO);
+                return Ok(expenseDTO);
             }
             catch (Exception ex)
             {
@@ -83,16 +83,16 @@ namespace BudgetControl.API.Controllers
         }
 
         [HttpPut, Authorize,Route("{id}")]
-        public async Task<IActionResult> Put(int id, [FromBody] ExpenseDTO outgoingDTO)
+        public async Task<IActionResult> Put(int id, [FromBody] ExpenseDTO expenseDTO)
         {
             try
             {
-                if (id != outgoingDTO.Id)
-                    throw new ArgumentException($"Param {nameof(id)} not equals in {nameof(outgoingDTO)}.{nameof(outgoingDTO.Id)}");
+                if (id != expenseDTO.Id)
+                    throw new ArgumentException($"Param {nameof(id)} not equals in {nameof(expenseDTO)}.{nameof(expenseDTO.Id)}");
 
-                await _service.Update(outgoingDTO);
+                await _service.Update(expenseDTO);
 
-                return Ok(outgoingDTO);
+                return Ok(expenseDTO);
 
             }
             catch (Exception ex)
@@ -106,11 +106,11 @@ namespace BudgetControl.API.Controllers
         {
             try
             {
-                var outgoing = await _service.GetById(id);
+                var expense = await _service.GetById(id);
 
-                if (outgoing == null) return NotFound(id);
+                if (expense == null) return NotFound(id);
 
-                await _service.Delete(outgoing);
+                await _service.Delete(expense);
 
                 return Ok();
             }

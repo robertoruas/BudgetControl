@@ -1,11 +1,6 @@
 ﻿using BudgetControl.Core.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BudgetControl.Infrastructure.Persistence.EntityConfiguration
 {
@@ -18,6 +13,12 @@ namespace BudgetControl.Infrastructure.Persistence.EntityConfiguration
             builder.Property(x => x.Description).HasMaxLength(500).IsRequired();
             builder.Property(x => x.Value).HasPrecision(16, 2).IsRequired();
             builder.Property(x => x.Date).HasColumnType("date").IsRequired();
+
+            builder.HasOne(x => x.Category)
+                .WithMany(c => c.Expenses)
+                .HasForeignKey(x => x.CategoryId)
+                .OnDelete(DeleteBehavior.NoAction)
+                .IsRequired();
         }
     }
 }

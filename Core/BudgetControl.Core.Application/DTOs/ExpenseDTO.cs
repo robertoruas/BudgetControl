@@ -14,5 +14,8 @@ namespace BudgetControl.Core.Application.DTOs
 
         [Required(ErrorMessage = $"{nameof(Description)} is required."), DataType(DataType.Date)]
         public DateTime Date { get; set; }
+
+        [Required(ErrorMessage = $"{nameof(CategoryId)} is required.")]
+        public int CategoryId { get; set; }
     }
 }

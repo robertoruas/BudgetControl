@@ -13,6 +13,12 @@ namespace BudgetControl.Infrastructure.Persistence.EntityConfiguration
             builder.Property(x => x.Description).HasMaxLength(500).IsRequired();
             builder.Property(x => x.Value).HasPrecision(16, 2).IsRequired();
             builder.Property(x => x.Date).HasColumnType("date").IsRequired();
+
+            builder.HasOne(x => x.Category)
+                .WithMany(c => c.Incomes)
+                .HasForeignKey(x => x.CategoryId)
+                .OnDelete(DeleteBehavior.NoAction)
+                .IsRequired();
         }
     }
 }

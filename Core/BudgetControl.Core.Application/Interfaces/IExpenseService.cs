@@ -1,5 +1,4 @@
 ﻿using BudgetControl.Core.Application.DTOs;
-using BudgetControl.Core.Domain.Entities;
 
 namespace BudgetControl.Core.Application.Interfaces
 {

@@ -16,6 +16,8 @@ namespace BudgetControl.Infrastructure.Persistence.Context
 
         public DbSet<Expense> Expenses { get; set; }
 
+        public DbSet<Category> Categories { get; set; }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             base.OnConfiguring(optionsBuilder);

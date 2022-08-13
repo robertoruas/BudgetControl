@@ -2,25 +2,25 @@
 {
     public class Income : Entity
     {
-        public Income(string description, decimal value, DateTime date)
+        public Income(string description, decimal value, DateTime date, int categoryId)
         {
-            if (value <= 0) throw new ArgumentException("The Income value must be greater than 0.", nameof(value));
-            if (date == DateTime.MinValue || date == DateTime.MaxValue) throw new ArgumentException("Enter a valid date.", nameof(value));
-
             Description = description ?? throw new ArgumentNullException(nameof(description));
             Value = value;
             Date = date;
+            CategoryId = categoryId;
+
+            Validate();
         }
 
-        public Income(int id, string description, decimal value, DateTime date)
+        public Income(int id, string description, decimal value, DateTime date, int categoryId)
         {
-            if (value <= 0) throw new ArgumentException("The Income value must be greater than 0.", nameof(value));
-            if (date == DateTime.MinValue || date == DateTime.MaxValue) throw new ArgumentException("Enter a valid date.", nameof(value));
-
             Id = id;
             Description = description ?? throw new ArgumentNullException(nameof(description));
             Value = value;
             Date = date;
+            CategoryId = categoryId;
+
+            Validate();
         }
 
         public string Description { get; private set; }
@@ -28,6 +28,10 @@
         public decimal Value { get; private set; }
 
         public DateTime Date { get; private set; }
+
+        public int CategoryId { get; private set; }
+
+        public Category Category { get; set; }
 
         public Months Month
         {
@@ -45,6 +49,12 @@
             }
         }
 
+        private void Validate()
+        {
+            if (Value <= 0) throw new ArgumentException("The Income value must be greater than 0.", nameof(Value));
+            if (Date == DateTime.MinValue || Date == DateTime.MaxValue) throw new ArgumentException("Enter a valid date.", nameof(Date));
+            if (CategoryId <= 0) throw new ArgumentException("Enter a valid category", nameof(CategoryId));
+        }
 
     }
 }
