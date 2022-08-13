@@ -2,7 +2,7 @@
 
 namespace BudgetControl.Core.Application.DTOs
 {
-    public class OutgoingDTO
+    public class ExpenseDTO
     {
         public int Id { get; set; }
 

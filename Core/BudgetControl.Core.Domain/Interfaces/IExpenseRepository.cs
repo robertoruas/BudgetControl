@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 
 namespace BudgetControl.Core.Domain.Interfaces
 {
-    public interface IOutgoingRepository : IRepository<Outgoing>
+    public interface IExpenseRepository : IRepository<Expense>
     {
-        Task<IEnumerable<Outgoing>> GetByMonthAndYear(int month, int year);
+        Task<IEnumerable<Expense>> GetByMonthAndYear(int month, int year);
     }
 }

@@ -10,11 +10,11 @@ using System.Threading.Tasks;
 
 namespace BudgetControl.Infrastructure.Persistence.Repositories
 {
-    public class OutgoingRepository : Repository<Outgoing>, IOutgoingRepository
+    public class ExpenseRepository : Repository<Expense>, IExpenseRepository
     {
-        public OutgoingRepository(ApplicationContext context) : base(context) { }
+        public ExpenseRepository(ApplicationContext context) : base(context) { }
 
-        public async Task<IEnumerable<Outgoing>> GetByMonthAndYear(int month, int year)
+        public async Task<IEnumerable<Expense>> GetByMonthAndYear(int month, int year)
         {
             return await Entity.Where(x => x.Date.Month == month && x.Date.Year == year).ToListAsync();
         }

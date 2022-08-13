@@ -19,11 +19,11 @@ namespace BudgetControl.Infrastructure.Shared.ConfigurationServices
 
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IIncomeRepository, IncomeRepository>();
-            services.AddScoped<IOutgoingRepository, OutgoingRepository>();
+            services.AddScoped<IExpenseRepository, ExpenseRepository>();
 
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IIncomeService, IncomeService>();
-            services.AddScoped<IOutgoingService, OutgoingService>();
+            services.AddScoped<IExpenseService, ExpenseService>();
 
             return services;
         }

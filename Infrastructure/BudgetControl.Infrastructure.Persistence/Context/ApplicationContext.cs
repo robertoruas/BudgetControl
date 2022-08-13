@@ -14,7 +14,7 @@ namespace BudgetControl.Infrastructure.Persistence.Context
 
         public DbSet<Income> Incomes { get; set; }
 
-        public DbSet<Outgoing> Outgoings { get; set; }
+        public DbSet<Expense> Expenses { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

@@ -3,8 +3,8 @@ using BudgetControl.Core.Domain.Entities;
 
 namespace BudgetControl.Core.Application.Interfaces
 {
-    public interface IOutgoingService : IService<OutgoingDTO>
+    public interface IExpenseService : IService<ExpenseDTO>
     {
-        Task<IEnumerable<OutgoingDTO>> GetByMonthAndYear(int month, int year);
+        Task<IEnumerable<ExpenseDTO>> GetByMonthAndYear(int month, int year);
     }
 }

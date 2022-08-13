@@ -6,11 +6,11 @@ using Microsoft.AspNetCore.Mvc;
 namespace BudgetControl.API.Controllers
 {
     [ApiController, Route("api/v1/[controller]")]
-    public class OutgoingController : ControllerBase
+    public class ExpenseController : ControllerBase
     {
-        private readonly IOutgoingService _service;
+        private readonly IExpenseService _service;
 
-        public OutgoingController(IOutgoingService service)
+        public ExpenseController(IExpenseService service)
         {
             _service = service ?? throw new ArgumentNullException(nameof(service));
         }
@@ -69,7 +69,7 @@ namespace BudgetControl.API.Controllers
         }
 
         [HttpPost, Authorize]
-        public async Task<IActionResult> Post([FromBody] OutgoingDTO outgoingDTO)
+        public async Task<IActionResult> Post([FromBody] ExpenseDTO outgoingDTO)
         {
             try
             {
@@ -83,7 +83,7 @@ namespace BudgetControl.API.Controllers
         }
 
         [HttpPut, Authorize,Route("{id}")]
-        public async Task<IActionResult> Put(int id, [FromBody] OutgoingDTO outgoingDTO)
+        public async Task<IActionResult> Put(int id, [FromBody] ExpenseDTO outgoingDTO)
         {
             try
             {

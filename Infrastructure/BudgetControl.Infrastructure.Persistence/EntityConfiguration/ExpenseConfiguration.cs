@@ -9,9 +9,9 @@ using System.Threading.Tasks;
 
 namespace BudgetControl.Infrastructure.Persistence.EntityConfiguration
 {
-    public class OutgoingConfiguration : IEntityTypeConfiguration<Outgoing>
+    public class ExpenseConfiguration : IEntityTypeConfiguration<Expense>
     {
-        public void Configure(EntityTypeBuilder<Outgoing> builder)
+        public void Configure(EntityTypeBuilder<Expense> builder)
         {
             builder.HasKey(x => x.Id);
 

@@ -11,54 +11,54 @@ using System.Threading.Tasks;
 
 namespace BudgetControl.Core.Application.Services
 {
-    public class OutgoingService : IOutgoingService
+    public class ExpenseService : IExpenseService
     {
-        private IOutgoingRepository _outgoingRepository;
+        private IExpenseRepository _outgoingRepository;
 
         private readonly IMapper _mapper;
 
-        public OutgoingService(IOutgoingRepository outgoingRepository, IMapper mapper)
+        public ExpenseService(IExpenseRepository outgoingRepository, IMapper mapper)
         {
             _outgoingRepository = outgoingRepository ?? throw new ArgumentNullException(nameof(outgoingRepository));
             _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
         }
 
-        public async Task Add(OutgoingDTO outgoingDto)
+        public async Task Add(ExpenseDTO outgoingDto)
         {
-            var mapOutgoing = _mapper.Map<Outgoing>(outgoingDto);
+            var mapOutgoing = _mapper.Map<Expense>(outgoingDto);
             await _outgoingRepository.Create(mapOutgoing);
         }
 
-        public async Task Delete(OutgoingDTO dto)
+        public async Task Delete(ExpenseDTO dto)
         {
-            var mapOutgoing = _mapper.Map<Outgoing>(dto);
+            var mapOutgoing = _mapper.Map<Expense>(dto);
             await _outgoingRepository.Delete(mapOutgoing);
         }
 
-        public async Task<IEnumerable<OutgoingDTO>> GetAll()
+        public async Task<IEnumerable<ExpenseDTO>> GetAll()
         {
             var result = await _outgoingRepository.Get();
 
-            return _mapper.Map<IEnumerable<OutgoingDTO>>(result);
+            return _mapper.Map<IEnumerable<ExpenseDTO>>(result);
         }
 
-        public async Task<OutgoingDTO> GetById(int id)
+        public async Task<ExpenseDTO> GetById(int id)
         {
             var result = await _outgoingRepository.GetById(id);
 
-            return _mapper.Map<OutgoingDTO>(result);
+            return _mapper.Map<ExpenseDTO>(result);
         }
 
-        public async Task<IEnumerable<OutgoingDTO>> GetByMonthAndYear(int month, int year)
+        public async Task<IEnumerable<ExpenseDTO>> GetByMonthAndYear(int month, int year)
         {
             var result = await _outgoingRepository.GetByMonthAndYear(month, year);
 
-            return _mapper.Map<IEnumerable<OutgoingDTO>>(result);
+            return _mapper.Map<IEnumerable<ExpenseDTO>>(result);
         }
 
-        public async Task Update(OutgoingDTO outgoingDto)
+        public async Task Update(ExpenseDTO outgoingDto)
         {
-            var mapOutgoing = _mapper.Map<Outgoing>(outgoingDto);
+            var mapOutgoing = _mapper.Map<Expense>(outgoingDto);
             await _outgoingRepository.Update(mapOutgoing);
         }
     }
