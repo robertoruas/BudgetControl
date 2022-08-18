@@ -11,5 +11,7 @@ namespace BudgetControl.Core.Application.Interfaces
     public interface IIncomeService : IService<IncomeDTO>
     {
         Task<IEnumerable<IncomeDTO>> GetByMonthAndYear(int month, int year);
+
+        Task<IEnumerable<IncomeDTO>> GetByDescription(string description);
     }
 }

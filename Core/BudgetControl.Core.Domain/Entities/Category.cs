@@ -2,6 +2,21 @@
 {
     public class Category : Entity
     {
+        public Category(int id, string name, string description, CategoryType type)
+        {
+            Id = id;
+            Name = name ?? throw new ArgumentNullException(nameof(name));
+            Description = description ?? throw new ArgumentNullException(nameof(description));
+            Type = type;
+        }
+
+        public Category(string name, string description, CategoryType type)
+        {
+            Name = name ?? throw new ArgumentNullException(nameof(name));
+            Description = description ?? throw new ArgumentNullException(nameof(description));
+            Type = type;
+        }
+
         public string Name { get; private set; }
 
         public string Description { get; private set; }

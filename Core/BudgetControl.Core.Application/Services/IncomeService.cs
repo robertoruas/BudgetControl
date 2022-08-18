@@ -37,6 +37,13 @@ namespace BudgetControl.Core.Application.Services
             return _mapper.Map<IEnumerable<IncomeDTO>>(result);
         }
 
+        public async Task<IEnumerable<IncomeDTO>> GetByDescription(string description)
+        {
+            var result = await _incomeRepository.GetByDescription(description);
+
+            return _mapper.Map<IEnumerable<IncomeDTO>>(result);
+        }
+
         public async Task<IncomeDTO> GetById(int id)
         {
             var result = await _incomeRepository.GetById(id);

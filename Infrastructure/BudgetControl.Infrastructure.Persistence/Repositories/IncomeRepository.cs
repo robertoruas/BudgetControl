@@ -9,6 +9,11 @@ namespace BudgetControl.Infrastructure.Persistence.Repositories
     {
         public IncomeRepository(ApplicationContext context) : base(context) { }
 
+        public async Task<IEnumerable<Income>> GetByDescription(string description)
+        {
+            return await Entity.Where(x => x.Description.Contains(description)).ToListAsync();
+        }
+
         public async Task<IEnumerable<Income>> GetByMonthAndYear(int month, int year)
         {
             return await Entity.Where(x => x.Date.Month == month && x.Date.Year == year).ToListAsync();

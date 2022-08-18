@@ -33,6 +33,24 @@ namespace BudgetControl.API.Controllers
             }
         }
 
+        [HttpGet, Authorize]
+        public async Task<IActionResult> Get([FromQuery] string description)
+        {
+            try
+            {
+                var expenses = await _service.GetByDescription(description);
+
+                if (expenses == null) return NotFound();
+
+                return Ok(expenses);
+
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex);
+            }
+        }
+
         [HttpGet, Authorize, Route("{id}")]
         public async Task<IActionResult> Get(int id)
         {

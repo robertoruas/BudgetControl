@@ -56,5 +56,12 @@ namespace BudgetControl.Core.Application.Services
             var mapOutgoing = _mapper.Map<Expense>(outgoingDto);
             await _repository.Update(mapOutgoing);
         }
+
+        public async Task<IEnumerable<ExpenseDTO>> GetByDescription(string description)
+        {
+            var result = await _repository.GetByDescription(description);
+
+            return _mapper.Map<IEnumerable<ExpenseDTO>>(result);
+        }
     }
 }
